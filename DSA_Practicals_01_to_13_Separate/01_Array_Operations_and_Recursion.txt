@@ -1,0 +1,57 @@
+// PRACTICAL 1: REVIEW OF ARRAY, ARRAY OPERATIONS AND RECURSION
+
+// CODE 1
+
+#include <iostream>
+using namespace std;
+int main() {
+    int arr[5] = {10, 20, 30, 40, 50};
+    for (int i = 0; i < 5; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+
+
+// CODE 2
+
+#include <iostream>
+using namespace std;
+int main() {
+    int arr[10] = {10, 20, 40, 50};
+    int n = 4;
+    int pos = 2;
+    int value = 30;
+    for (int i = n; i > pos; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[pos] = value;
+    n++;
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
+
+
+// CODE 3
+
+#include <iostream>
+using namespace std;
+int factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+int main() {
+    int n;
+    cout << "Enter a non-negative number: ";
+    cin >> n;
+    if (n < 0) {
+        cout << "Factorial is not defined for negative numbers.";
+        return 0;
+    }
+    cout << "Factorial = " << factorial(n);
+    return 0;
+}

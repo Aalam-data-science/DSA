@@ -1,0 +1,59 @@
+// PRACTICAL 4: POSTFIX EVALUATION USING STACK
+
+#include <iostream>
+#include <stack>
+#include <cmath>
+#include <cctype>
+#include <string>
+using namespace std;
+int main() {
+    string exp;
+    stack<int> s;
+    cout << "Enter postfix expression using single-digit operands: ";
+    cin >> exp;
+    for (char ch : exp) {
+        if (isdigit(static_cast<unsigned char>(ch))) {
+            s.push(ch - '0');
+        }
+        else {
+            if (s.size() < 2) {
+                cout << "Invalid postfix expression.";
+                return 0;
+            }
+            int b = s.top();
+            s.pop();
+            int a = s.top();
+            s.pop();
+            switch (ch) {
+                case '+':
+                    s.push(a + b);
+                    break;
+                case '-':
+                    s.push(a - b);
+                    break;
+                case '*':
+                    s.push(a * b);
+                    break;
+                case '/':
+                    if (b == 0) {
+                        cout << "Division by zero is not allowed.";
+                        return 0;
+                    }
+                    s.push(a / b);
+                    break;
+                case '^':
+                    s.push(static_cast<int>(pow(a, b)));
+                    break;
+                default:
+                    cout << "Invalid operator.";
+                    return 0;
+            }
+        }
+    }
+    if (s.size() != 1) {
+        cout << "Invalid postfix expression.";
+        return 0;
+    }
+    cout << "Result = " << s.top();
+    return 0;
+}

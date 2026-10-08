@@ -1,0 +1,85 @@
+// PRACTICAL 7: QUEUE - TRAVERSE AND SEARCH
+
+#include <iostream>
+using namespace std;
+const int SIZE = 5;
+class Queue {
+    int queue[SIZE];
+    int front, rear;
+public:
+    Queue() {
+        front = -1;
+        rear = -1;
+    }
+    void enqueue(int value) {
+        if (rear == SIZE - 1) {
+            cout << "Queue Overflow!" << endl;
+            return;
+        }
+        if (front == -1) {
+            front = 0;
+        }
+        rear++;
+        queue[rear] = value;
+        cout << value << " inserted into queue." << endl;
+    }
+    void traverse() {
+        if (front == -1) {
+            cout << "Queue is empty!" << endl;
+            return;
+        }
+        cout << "Queue elements: ";
+        for (int i = front; i <= rear; i++) {
+            cout << queue[i] << " ";
+        }
+        cout << endl;
+    }
+    void search(int value) {
+        if (front == -1) {
+            cout << "Queue is empty!" << endl;
+            return;
+        }
+        for (int i = front; i <= rear; i++) {
+            if (queue[i] == value) {
+                cout << value << " found at position "
+                     << (i - front + 1) << "." << endl;
+                return;
+            }
+        }
+        cout << value << " not found in the queue." << endl;
+    }
+};
+int main() {
+    Queue q;
+    int choice, value;
+    do {
+        cout << "\n--- QUEUE OPERATIONS ---" << endl;
+        cout << "1. Enqueue" << endl;
+        cout << "2. Traverse" << endl;
+        cout << "3. Search" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Enter value: ";
+                cin >> value;
+                q.enqueue(value);
+                break;
+            case 2:
+                q.traverse();
+                break;
+            case 3:
+                cout << "Enter value to search: ";
+                cin >> value;
+                q.search(value);
+                break;
+            case 4:
+                cout << "Program ended." << endl;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+    } while (choice != 4);
+    return 0;
+}
